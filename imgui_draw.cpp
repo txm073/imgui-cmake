@@ -5632,7 +5632,7 @@ begin:
             }
             else
             {
-                s = line_end ? line_end + 1 : text.End;
+                s = line_end ? line_end + 1 : text_end;
             }
             y += line_height;
         }
