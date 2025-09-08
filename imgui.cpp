@@ -17785,28 +17785,28 @@ void ImGui::DebugHookIdInfo(ImGuiID id, ImGuiDataType data_type, const void* dat
 
     if (info->DescOffset == -1)
     {
-        const char* result = NULL;
-        const char* result_end = NULL;
+        ImStrv result;
         switch (data_type)
         {
         case ImGuiDataType_S32:
-            ImFormatStringToTempBuffer(&result, &result_end, "%d", (int)(intptr_t)data_id);
+            ImFormatStringToTempBuffer(&result, "%d", (int)(intptr_t)data_id);
             break;
         case ImGuiDataType_String:
-            ImFormatStringToTempBuffer(&result, &result_end, "%.*s", data_id_end ? (int)((const char*)data_id_end - (const char*)data_id) : (int)ImStrlen((const char*)data_id), (const char*)data_id);
+            ImFormatStringToTempBuffer(&result, "%.*s", data_id_end ? (int)((const char*)data_id_end - (const char*)data_id) : (int)ImStrlen((const char*)data_id), (const char*)data_id);
             break;
         case ImGuiDataType_Pointer:
-            ImFormatStringToTempBuffer(&result, &result_end, "(void*)0x%p", data_id);
+            ImFormatStringToTempBuffer(&result, "(void*)0x%p", data_id);
             break;
         case ImGuiDataType_ID:
             // PushOverrideID() is often used to avoid hashing twice, which would lead to 2 calls to DebugHookIdInfo(). We prioritize the first one.
-            ImFormatStringToTempBuffer(&result, &result_end, "0x%08X [override]", id);
+            ImFormatStringToTempBuffer(&result, "0x%08X [override]", id);
             break;
         default:
             IM_ASSERT(0);
         }
         info->DescOffset = tool->ResultPathsBuf.size();
-        tool->ResultPathsBuf.append(result, result_end + 1); // Include zero terminator
+        result.End++; // Include zero terminator
+        tool->ResultPathsBuf.append(result);
     }
     info->QuerySuccess = true;
     info->DataType = (ImS8)data_type;
