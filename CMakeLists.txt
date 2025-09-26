@@ -20,6 +20,10 @@ elseif (IMGUI_SHARED)
     add_library(imgui SHARED ${IMGUI_SOURCES})
 endif()
 
+target_compile_definitions(imgui PUBLIC
+  IMGUI_USE_WCHAR32
+  IMGUI_DEFINE_MATH_OPERATORS
+)
 target_include_directories(
     imgui PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
