@@ -8,6 +8,7 @@ set(IMGUI_SOURCES
   "${CMAKE_CURRENT_SOURCE_DIR}/imgui_draw.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/imgui_tables.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/imgui_widgets.cpp"
+  "${CMAKE_CURRENT_SOURCE_DIR}/misc/cpp/imgui_stdlib.cpp"
 )
 
 if (DEFINED IMGUI_BACKENDS)
@@ -28,5 +29,6 @@ target_include_directories(
   imgui PRIVATE
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/backends
+  ${CMAKE_CURRENT_SOURCE_DIR}/misc/cpp
 )
 
